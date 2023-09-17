@@ -12,6 +12,7 @@ import * as chat from '@/api/chat'
 import ChatClientTest from '@/api/chat/ChatClientTest'
 import ChatClientDirectWeb from '@/api/chat/ChatClientDirectWeb'
 import ChatClientDirectOpenLive from '@/api/chat/ChatClientDirectOpenLive'
+import ChatClientDirectOpenLiveOld from '@/api/chat/ChatClientDirectOpenLiveOld'
 import ChatClientRelay from '@/api/chat/ChatClientRelay'
 import ChatRenderer from '@/components/ChatRenderer'
 import * as constants from '@/components/ChatRenderer/constants'
@@ -131,6 +132,8 @@ export default {
       cfg.minGiftPrice = toInt(cfg.minGiftPrice, chatConfig.DEFAULT_CONFIG.minGiftPrice)
       cfg.showDanmaku = toBool(cfg.showDanmaku)
       cfg.showGift = toBool(cfg.showGift)
+      cfg.showMember = toBool(cfg.showMember)
+      cfg.showSuperchat = toBool(cfg.showSuperchat)
       cfg.showGiftName = toBool(cfg.showGiftName)
       cfg.mergeSimilarDanmaku = toBool(cfg.mergeSimilarDanmaku)
       cfg.mergeGift = toBool(cfg.mergeGift)
@@ -171,6 +174,8 @@ export default {
       } else {
         if (this.roomKeyType === 1) {
           this.chatClient = new ChatClientDirectWeb(this.roomKeyValue)
+        } else if (this.roomKeyType === 3) {
+          this.chatClient = new ChatClientDirectOpenLiveOld(this.roomKeyValue)
         } else {
           this.chatClient = new ChatClientDirectOpenLive(this.roomKeyValue)
         }

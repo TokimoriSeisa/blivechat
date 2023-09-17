@@ -62,7 +62,7 @@ export function getImportStyle(allFonts) {
   }
   let res = []
   for (let font of fontsNeedToImport) {
-    res.push(`@import url("https://fonts.googleapis.com/css?family=${encodeURIComponent(font)}");`)
+    res.push(`@import url("https://fonts.loli.net/css?family=${encodeURIComponent(font)}");`)
   }
   return res.join('\n')
 }

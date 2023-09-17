@@ -15,6 +15,7 @@ import tornado.web
 import api.chat
 import api.main
 import api.open_live
+import api.open_live_v1
 import config
 import models.database
 import services.avatar
@@ -29,6 +30,7 @@ ROUTES = [
     *api.main.ROUTES,
     *api.chat.ROUTES,
     *api.open_live.ROUTES,
+    *api.open_live_v1.ROUTES,
     *api.main.LAST_ROUTES,
 ]
 

@@ -4,7 +4,7 @@
       <el-form :model="form" ref="form" label-width="150px">
         <el-tabs type="border-card">
           <el-tab-pane :label="$t('home.general')">
-            <el-form-item v-if="form.roomKeyType === 1"
+            <el-form-item v-if="form.roomKeyType === 1 || form.roomKeyType === 3"
               :label="$t('home.room')" prop="roomId" :rules="[
                 { required: true, message: $t('home.roomIdEmpty') },
                 { type: 'integer', min: 1, message: $t('home.roomIdInteger') }
@@ -13,6 +13,7 @@
               <el-row>
                 <el-col :span="6">
                   <el-select v-model="form.roomKeyType" style="width: 100%">
+                    <el-option :label="$t('home.roomIdOpen')" :value="3"></el-option>
                     <el-option :label="$t('home.authCode')" :value="2"></el-option>
                     <el-option :label="$t('home.roomId')" :value="1"></el-option>
                   </el-select>
@@ -38,6 +39,7 @@
               <el-row>
                 <el-col :span="6">
                   <el-select v-model="form.roomKeyType" style="width: 100%">
+                    <el-option :label="$t('home.roomIdOpen')" :value="3"></el-option>
                     <el-option :label="$t('home.authCode')" :value="2"></el-option>
                     <el-option :label="$t('home.roomId')" :value="1"></el-option>
                   </el-select>
@@ -65,6 +67,16 @@
               <el-col :xs="24" :sm="8">
                 <el-form-item :label="$t('home.showGift')">
                   <el-switch v-model="form.showGift"></el-switch>
+                </el-form-item>
+              </el-col>
+              <el-col :xs="24" :sm="8">
+                <el-form-item :label="$t('home.showMember')">
+                  <el-switch v-model="form.showMember"></el-switch>
+                </el-form-item>
+              </el-col>
+              <el-col :xs="24" :sm="8">
+                <el-form-item :label="$t('home.showSuperChat')">
+                  <el-switch v-model="form.showSuperChat"></el-switch>
                 </el-form-item>
               </el-col>
               <el-col :xs="24" :sm="8">
@@ -230,7 +242,7 @@ export default {
       },
       form: {
         ...chatConfig.getLocalConfig(),
-        roomKeyType: parseInt(window.localStorage.roomKeyType || '2'),
+        roomKeyType: parseInt(window.localStorage.roomKeyType || '3'),
         roomId: parseInt(window.localStorage.roomId || '1'),
         authCode: window.localStorage.authCode || '',
       }
@@ -238,7 +250,7 @@ export default {
   },
   computed: {
     roomKeyValue() {
-      if (this.form.roomKeyType === 1) {
+      if (this.form.roomKeyType === 1 || this.form.roomKeyType === 3) {
         return this.form.roomId
       } else {
         return this.form.authCode
@@ -341,7 +353,7 @@ export default {
     },
     // 因为要用在计算属性里，所以不能用this.$refs.form.validate
     validateForm() {
-      if (this.form.roomKeyType === 1) {
+      if (this.form.roomKeyType === 1 || this.form.roomKeyType === 3) {
         return this.roomKeyValue > 0
       } else if (this.form.roomKeyType === 2) {
         return this.AUTH_CODE_REG.test(this.roomKeyValue)

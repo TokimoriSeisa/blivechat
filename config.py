@@ -62,6 +62,8 @@ class AppConfig:
 
         self.open_live_access_key_id = ''
         self.open_live_access_key_secret = ''
+        self.open_live_v1_access_key_id = ''
+        self.open_live_v1_access_key_secret = ''
         self.open_live_app_id = 0
 
         self.enable_translate = True
@@ -111,6 +113,10 @@ class AppConfig:
             'open_live_access_key_secret', self.open_live_access_key_secret
         )
         self.open_live_app_id = app_section.getint('open_live_app_id', self.open_live_app_id)
+        self.open_live_v1_access_key_id = app_section.get('open_live_v1_access_key_id', self.open_live_v1_access_key_id)
+        self.open_live_v1_access_key_secret = app_section.get(
+            'open_live_v1_access_key_secret', self.open_live_v1_access_key_secret
+        )
 
         self.enable_translate = app_section.getboolean('enable_translate', self.enable_translate)
         self.allow_translate_rooms = _str_to_list(app_section.get('allow_translate_rooms', ''), int, set)

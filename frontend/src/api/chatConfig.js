@@ -6,6 +6,8 @@ export const DEFAULT_CONFIG = {
   minGiftPrice: 7, // $1
   showDanmaku: true,
   showGift: true,
+  showMember: true,
+  showSuperChat: true,
   showGiftName: false,
   mergeSimilarDanmaku: false,
   mergeGift: true,

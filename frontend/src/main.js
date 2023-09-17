@@ -83,7 +83,7 @@ const router = new VueRouter({
       component: Room,
       props(route) {
         let roomKeyType = parseInt(route.query.roomKeyType) || 1
-        if (roomKeyType < 1 || roomKeyType > 2) {
+        if (roomKeyType < 1 || roomKeyType > 3) {
           roomKeyType = 1
         }
 
